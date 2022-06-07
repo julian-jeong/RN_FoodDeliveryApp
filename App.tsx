@@ -7,16 +7,21 @@
  *
  * @format
  */
+// 웹뷰는 실시간으로 고칠 수 있다. 
+// 터미널 명령어
+// To reload the app press "r"
+// To open developer menu press "d"
+
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
+  SafeAreaView, // 아이폰 노치(탈모부분) 짤라내고 빼고 실제로 콘텐츠가 채워지는 부분을 만들어준다. 최상단을 감싼다.
+  ScrollView, // 콘텐츠가 화면보다 넘치면 ScrollView을 사용해야 스크롤이된다. 하지만 성능 이슈가 있어 컴포넌트가 많으면 Flatlist를 사용해야한다.
+  StatusBar, // 휴대폰 배터리 표시, 시간 표시 부분
   StyleSheet,
-  Text,
+  Text, // span !!RN에서는 text가 있으면 Text으로 감싸야한다. View만쓰면 안됨
   useColorScheme,
-  View,
+  View, // div
 } from 'react-native';
 
 import {
@@ -29,7 +34,7 @@ import {
 
 const Section: React.FC<{
   title: string;
-}> = ({children, title}) => {
+}> = ({ children, title }) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -53,7 +58,7 @@ const Section: React.FC<{
       </Text>
     </View>
   );
-};
+}; // 하나의 파일에 컴포넌트가 두개 방법은 지양한다. 파일로 분리하는 것을 추천한다.
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -93,9 +98,10 @@ const App = () => {
   );
 };
 
+//RN에서 id를 부여해서 적용해준다. inline으로 스타일을 쓰는 것보다 성능이 좋다. but 드라마틱하게 좋지는 않음
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
+    marginTop: 32, // px단위로 style을 주는 것이 아니다. dp - android 단위를 사용한다. 화면 비율에 따라 달라진다. % 와 다르다. 해상도가 같으면 화면이 같다. camal case를 사용한다.
     paddingHorizontal: 24,
   },
   sectionTitle: {
